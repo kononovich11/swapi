@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import './people-page.css';
 import ItemList from '../item-list';
-import PersonDetails from '../person-details';
+import ItemDetails from '../item-details';
 import Row from '../row';
 import ErrorBoundry from '../error-boundry';
 export default class PeoplePage extends Component {
@@ -25,9 +25,9 @@ export default class PeoplePage extends Component {
         {({name, gender}) => `${name}:${gender}`}
       </ItemList>
     );
-    const personDetails =( 
+    const itemDetails =( 
     <ErrorBoundry>
-      <PersonDetails personId={this.state.selectedPerson}/>;
+      <ItemDetails itemId={this.state.selectedPerson}/>;
     </ErrorBoundry>
     );
 
@@ -35,7 +35,7 @@ export default class PeoplePage extends Component {
       return <div>Sorry, app has error</div>
     }
     return (
-      <Row left={itemList} right={personDetails}/>
+      <Row left={itemList} right={itemDetails}/>
     );
   }
 }
