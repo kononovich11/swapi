@@ -21,13 +21,15 @@ export default class PeoplePage extends Component {
   }
 
   render() {
+    const {getData} = this.props;
     if (this.state.hasError) {
       return <div>Sorry, app has error</div>
     }
     return (
       <div className="row mb2">
           <div className="col-md-6">
-            <ItemList onPersonSelected={this.onPersonSelected}/>
+            <ItemList onPersonSelected={this.onPersonSelected}
+                      getData={getData}/>
           </div>
           <div className="col-md-6">
             <PersonDetails personId={this.state.selectedPerson}/>
