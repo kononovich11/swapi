@@ -18,6 +18,7 @@ export default class PeoplePage extends Component {
 
   render() {
     const {getData} = this.props;
+    console.log(getData);
     const itemList = (
       <ItemList onPersonSelected={this.onPersonSelected}
                 getData={getData}
@@ -35,7 +36,8 @@ export default class PeoplePage extends Component {
       return <div>Sorry, app has error</div>
     }
     return (
-      <Row left={itemList} right={itemDetails}/>
+      itemList
+      // <Row left={itemList} right={itemDetails}/>
     );
   }
 }

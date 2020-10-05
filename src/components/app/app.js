@@ -80,6 +80,7 @@ export default class App extends Component {
 
         <ErrorButton/>
         <PeoplePage getData={this.swapi.getAllPeople}/>  */}
+        <PeoplePage getData={this.swapi.getAllPeople}/>
 
         <Row left={personDetails} right={starshipDetails}/>
 
