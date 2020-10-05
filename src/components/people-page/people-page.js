@@ -3,15 +3,11 @@ import './people-page.css';
 import ItemList from '../item-list';
 import PersonDetails from '../person-details';
 import Row from '../row';
+import ErrorBoundry from '../error-boundry';
 export default class PeoplePage extends Component {
 
   state = {
     selectedPerson: 3,
-    hasError: false,
-  }
-
-  componentDidCatch() {
-    this.setState({hasError: true});
   }
 
   onPersonSelected = (id) => {
@@ -25,10 +21,15 @@ export default class PeoplePage extends Component {
     const itemList = (
       <ItemList onPersonSelected={this.onPersonSelected}
                 getData={getData}
-                renderItem={(item) => item.name}
-      />
+      >
+        {({name, gender}) => `${name}:${gender}`}
+      </ItemList>
     );
-    const personDetails =<PersonDetails personId={this.state.selectedPerson}/>;
+    const personDetails =( 
+    <ErrorBoundry>
+      <PersonDetails personId={this.state.selectedPerson}/>;
+    </ErrorBoundry>
+    );
 
     if (this.state.hasError) {
       return <div>Sorry, app has error</div>
