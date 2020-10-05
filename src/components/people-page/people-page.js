@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import './people-page.css';
 import ItemList from '../item-list';
 import PersonDetails from '../person-details';
-
+import Row from '../row';
 export default class PeoplePage extends Component {
 
   state = {
@@ -22,21 +22,20 @@ export default class PeoplePage extends Component {
 
   render() {
     const {getData} = this.props;
+    const itemList = (
+      <ItemList onPersonSelected={this.onPersonSelected}
+                getData={getData}
+                renderItem={(item) => item.name}
+      />
+    );
+    const personDetails =<PersonDetails personId={this.state.selectedPerson}/>;
+
     if (this.state.hasError) {
       return <div>Sorry, app has error</div>
     }
     return (
-      <div className="row mb2">
-          <div className="col-md-6">
-            <ItemList onPersonSelected={this.onPersonSelected}
-                      getData={getData}
-                      renderItem={item => `${item.name}, ${item.gender}`}
-                      />
-          </div>
-          <div className="col-md-6">
-            <PersonDetails personId={this.state.selectedPerson}/>
-          </div>
-        </div>
+      <Row left={itemList} right={personDetails}/>
     );
   }
 }
+
