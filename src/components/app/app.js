@@ -8,7 +8,8 @@ import Row from '../row';
 import SwapiService from '../../services/swapi-service';
 
 import './app.css';
-import ItemDetails from '../item-details';
+import ItemDetails, {Record} from '../item-details/item-details';
+
 
 export default class App extends Component {
 
@@ -50,14 +51,22 @@ export default class App extends Component {
     const personDetails = ( 
       <ItemDetails itemId={11}
                    getData = {getPerson}
-                   getImage ={getPersonImage}/>
-      );
+                   getImage ={getPersonImage}>
+
+        <Record field="gender" label="Gender"/>
+        <Record field="eyeColor" label="Eye color"/>
+
+      </ItemDetails>
+    );
     const starshipDetails = ( 
       <ItemDetails itemId={10}
                     getData = {getStarship}
-                    getImage={getStarshipImage}
-                    />
-    );
+                    getImage={getStarshipImage}>
+
+        <Record field="model" label="Model"/>
+
+      </ItemDetails>
+      );
 
     return (
       <div>
