@@ -13,7 +13,8 @@ import {PersonDetails,
         PlanetDetails,
         StarshipDetails,
         PersonList,
-        PlanetList} 
+        PlanetList,
+        StarshipList} 
 from '../sw-components';
 
 
@@ -87,9 +88,9 @@ export default class App extends Component {
 
         <ErrorButton/>
         <PeoplePage getData={this.swapi.getAllPeople}/>  */}
-        <PersonList onPersonSelected={this.onPersonSelected}>
-             {({name, gender}) => `${name}:${gender}`}
-        </PersonList>
+        <PersonList onPersonSelected={this.onPersonSelected}/>
+        <PlanetList/>
+        <StarshipList/>
 
         <PersonDetails itemId={5}/>
         <PlanetDetails itemId={5}/>
