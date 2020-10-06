@@ -54,7 +54,7 @@ export default class ItemDetails extends Component {
       return <div>Select a person from list</div>;
     }
 
-    const {id, name, gender, birthYear, eyecolor} = this.state.item;
+    const {name} = this.state.item;
     const {image, item} = this.state;
 
     return (

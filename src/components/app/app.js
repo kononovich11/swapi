@@ -9,8 +9,11 @@ import SwapiService from '../../services/swapi-service';
 import ItemList from '../item-list';
 import ItemDetails, {Record} from '../item-details/item-details';
 import './app.css';
-import {PersonList,
-        PlanetList,} 
+import {PersonDetails,
+        PlanetDetails,
+        StarshipDetails,
+        PersonList,
+        PlanetList} 
 from '../sw-components';
 
 
@@ -88,11 +91,12 @@ export default class App extends Component {
              {({name, gender}) => `${name}:${gender}`}
         </PersonList>
 
-        <PlanetList onPersonSelected={this.onPersonSelected}>
-             {({name}) => `${name}`}
-        </PlanetList>
+        <PersonDetails itemId={5}/>
+        <PlanetDetails itemId={5}/>
+        <StarshipDetails itemId={15}/>
+   
 
-        <Row left={personDetails} right={starshipDetails}/>
+        {/* <Row left={personDetails} right={starshipDetails}/> */}
 
       </div>
     );
