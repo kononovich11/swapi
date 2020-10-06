@@ -6,6 +6,7 @@ import ErrorButton from '../error-button';
 import PeoplePage from '../people-page';
 import Row from '../row';
 import SwapiService from '../../services/swapi-service';
+import TestSwapiService from '../../services/test-service';
 import ItemList from '../item-list';
 import ItemDetails, {Record} from '../item-details/item-details';
 import './app.css';
@@ -16,11 +17,12 @@ import {PersonDetails,
         PlanetList,
         StarshipList} 
 from '../sw-components';
+import {Provider, Consumer} from '../swapi-context';
 
 
 export default class App extends Component {
 
-  swapi = new SwapiService();
+  swapi = new TestSwapiService();
 
   state = {
     showRandomPlanet: true,
@@ -77,7 +79,7 @@ export default class App extends Component {
       );
 
     return (
-      <div>
+      <Provider value={this.swapi}>
         <Header />
         {/* {planet} */}
 
@@ -99,7 +101,7 @@ export default class App extends Component {
 
         {/* <Row left={personDetails} right={starshipDetails}/> */}
 
-      </div>
+      </Provider>
     );
   } 
 };
