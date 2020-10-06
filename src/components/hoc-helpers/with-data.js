@@ -5,23 +5,24 @@ const  withData = (View, getData) => {
   return class extends Component {
     
     state = {
-      itemList: null,
+      data: null,
     }
 
     componentDidMount() {
-      getData().then((itemList) => {
-        this.setState({itemList})
+      getData()
+      .then((data) => {
+        this.setState({data})
       });
     }
 
     render() {
-      const {itemList} = this.state;
+      const {data} = this.state;
 
-      if(!itemList) {
+      if(!data) {
         return <Loader/>;
       }
 
-      return <View {...this.props} data={itemList}/>
+      return <View {...this.props} data={data}/>
     }
   };
 };
