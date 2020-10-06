@@ -22,7 +22,7 @@ import {Provider, Consumer} from '../swapi-context';
 
 export default class App extends Component {
 
-  swapi = new TestSwapiService();
+  swapi = new SwapiService();
 
   state = {
     showRandomPlanet: true,
