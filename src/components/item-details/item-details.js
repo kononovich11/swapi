@@ -4,7 +4,6 @@ import SwapiService from '../../services/swapi-service';
 import ErrorButton from '../error-button';
 
 const Record = ({item, field , label}) => {
-  console.log(item);
  return ( 
  <li className="list-group-item">
     <span className="term">{label}</span>
@@ -30,8 +29,10 @@ export default class ItemDetails extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    if(this.props.itemId !== prevProps.itemId) {
-      this.updatePerson();
+    if(this.props.itemId !== prevProps.itemId ||
+      this.props.getData !== prevProps.getData ||
+      this.props.getImage !== prevProps.getImage) {
+      this.updatePerson(); 
     }
   }
 

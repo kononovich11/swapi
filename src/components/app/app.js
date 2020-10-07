@@ -22,9 +22,8 @@ import {Provider, Consumer} from '../swapi-context';
 
 export default class App extends Component {
 
-  swapi = new SwapiService();
-
   state = {
+    swapi: new TestSwapiService(),
     showRandomPlanet: true,
     hasError: false,
   }
@@ -32,6 +31,17 @@ export default class App extends Component {
   componentDidCatch() {
     console.log('componentDidCatch');
     this.setState({hasError: true});
+  }
+
+  onServiceChange = () => {
+    this.setState(({swapi}) => {
+      const Service = swapi instanceof SwapiService? 
+                      TestSwapiService: SwapiService;
+      console.log('swithed to ' + Service.name );
+      return {
+        swapi: new Service(),
+      }
+    });
   }
 
   toggelRandomPlanet = () => {
@@ -56,7 +66,7 @@ export default class App extends Component {
             getPersonImage,
             getPlanetImage,
             getStarshipImage,
-          } = this.swapi;
+          } = this.state.swapi;
 
     const personDetails = ( 
       <ItemDetails itemId={11}
@@ -78,8 +88,8 @@ export default class App extends Component {
       );
 
     return (
-      <Provider value={this.swapi}>
-        <Header />
+      <Provider value={this.state.swapi}>
+        <Header onServiceChange={this.onServiceChange}/>
         {/* {planet} */}
 
         {/* <button className="toggel-planet btn btn-warning btn-lg"
