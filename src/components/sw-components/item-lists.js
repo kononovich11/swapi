@@ -13,7 +13,6 @@ const withChildFunction = (Wrapped, fn) => {
 }
 
 const renderName = ({name}) => `${name}`;
-const renderModelAndName = (({length, name}) => `${name}:${length}`);
 
 const mapPersonMethodsToProps = (swapi) => {
   return {
