@@ -2,17 +2,19 @@ import React from 'react';
 import ItemDetails, {Record} from '../item-details';
 import {withConsumer} from '../hoc-helpers';
 
-const PlanetDetails = ({itemId, swapi}) => {
-  const {getPlanet, getPlanetImage} = swapi;
+const PlanetDetails = (props) => {
   return (
-  <ItemDetails itemId={itemId}
-    getData = {getPlanet}
-    getImage ={getPlanetImage}>
-
-    <Record field="gender" label="Gender"/>
-    <Record field="eyeColor" label="Eye color"/>
-    </ItemDetails>
+  <ItemDetails {...props}>
+    <Record field="diameter" label="Diameter"/>
+  </ItemDetails>
   )   
 };
 
-export default withConsumer(PlanetDetails);
+const mapMethodsToProps = (swapi) => {
+  return {
+    getData: swapi.getPlanet,
+    getImage: swapi.getPlanetImage,
+  }
+}
+
+export default withConsumer(PlanetDetails ,mapMethodsToProps);

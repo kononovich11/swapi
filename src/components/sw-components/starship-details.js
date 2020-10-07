@@ -2,17 +2,20 @@ import React from 'react';
 import ItemDetails, {Record} from '../item-details';
 import {withConsumer} from '../hoc-helpers';
 
-const StarshipDetails = ({itemId, swapi}) => {
-  const {getStarship, getStarshipImage} = swapi;
+const StarshipDetails = (props) => {
   return (
-    <ItemDetails itemId={itemId}
-            getData = {getStarship}
-            getImage ={getStarshipImage}>
-
-    <Record field="gender" label="Gender"/>
-    <Record field="eyeColor" label="Eye color"/>
+    <ItemDetails {...props}>
+      <Record field="passengers" label="Passengers"/>
+      <Record field="manufacturer" label="Manufacturer"/>
     </ItemDetails>
   )
 };
 
-export default withConsumer(StarshipDetails);
+const mapMethodsToProps = (swapi) => {
+  return {
+    getData: swapi.getStarship,
+    getImage: swapi.getStarshipImage,
+  }
+}
+
+export default withConsumer(StarshipDetails, mapMethodsToProps);

@@ -54,7 +54,7 @@ export default class App extends Component {
     const { getPerson, 
             getStarship, 
             getPersonImage,
-            getPlanetsImage,
+            getPlanetImage,
             getStarshipImage,
           } = this.swapi;
 
@@ -64,7 +64,6 @@ export default class App extends Component {
                    getImage ={getPersonImage}>
 
         <Record field="gender" label="Gender"/>
-        <Record field="eyeColor" label="Eye color"/>
 
       </ItemDetails>
     );
