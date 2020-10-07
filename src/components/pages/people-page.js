@@ -11,7 +11,7 @@ export default class PeoplePage extends Component {
     selectedItem: null,
   }
 
-  onPersonSelected = (selectedItem) => {
+  onItemSelected = (selectedItem) => {
     this.setState({selectedItem});
   }
 
@@ -20,7 +20,7 @@ export default class PeoplePage extends Component {
 
     return (
       <Row 
-        left={<PersonList onPersonSelected={this.onPersonSelected}/>}     right={<PersonDetails itemId={selectedItem}/>}
+        left={<PersonList onItemSelected={this.onItemSelected}/>}     right={<PersonDetails itemId={selectedItem}/>}
       />
     );
   }

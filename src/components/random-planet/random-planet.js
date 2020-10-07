@@ -7,6 +7,10 @@ import Loader from '../loader';
 
 export default class RandomPlanet extends Component {
 
+  static defaultProps = {
+    updateInterval: 7000,
+  };
+
   state = {
     planet: {},
     loader: true,
@@ -16,13 +20,14 @@ export default class RandomPlanet extends Component {
 
   componentDidMount() {
     console.log('did mount');
+    const {updateInterval} = this.props;
     this.updatePlanet();
-    // this.interval = setInterval(this.updatePlanet, 7000);
+    this.interval = setInterval(this.updatePlanet, updateInterval);
   }
   
   componentWillUnmount() {
    console.log('componentWillUnmount');
-  //  clearInterval(this.interval);
+   clearInterval(this.interval);
   }
 
   onPlanetLoaded = (planet) => {
@@ -61,7 +66,7 @@ export default class RandomPlanet extends Component {
         {isError}
       </div>
     );
-  }
+  };
 }
 
 const PlanetView = ( {planet} ) => {

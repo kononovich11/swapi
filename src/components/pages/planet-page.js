@@ -11,7 +11,7 @@ export default class PlanetPage extends Component {
     selectedItem: null,
   }
 
-  onPersonSelected = (selectedItem) => {
+  onItemSelected = (selectedItem) => {
     this.setState({selectedItem});
   }
 
@@ -20,7 +20,7 @@ export default class PlanetPage extends Component {
 
     return (
       <Row 
-        left={<PlanetList onPersonSelected={this.onPersonSelected}/>}     right={<PlanetDetails itemId={selectedItem}/>}
+        left={<PlanetList onItemSelected={this.onItemSelected}/>}     right={<PlanetDetails itemId={selectedItem}/>}
       />
     );
   }

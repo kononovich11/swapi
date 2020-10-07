@@ -3,7 +3,7 @@ import './item-list.css';
 
 const ItemList = (props) => {
 
-  const {data, onPersonSelected } = props;
+  const {data, onItemSelected } = props;
 
   const items = data.map((item) => {
       const {id} = item;
@@ -11,7 +11,7 @@ const ItemList = (props) => {
       return (
         <li className="list-group-item"
             key={id}
-            onClick={() => onPersonSelected(id)}>
+            onClick={() => onItemSelected(id)}>
           {label}
         </li>
       );
@@ -22,6 +22,10 @@ const ItemList = (props) => {
         {items}
       </ul>
     );
-}
+};
+
+ItemList.defaultProps = {
+  onItemSelected: () => {},
+};
 
 export default ItemList;
