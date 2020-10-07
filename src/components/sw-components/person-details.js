@@ -17,4 +17,4 @@ const mapMethodsToProps = (swapi) => {
     getImage: swapi.getPersonImage,
   }
 }
-export default withConsumer(PersonDetails, mapMethodsToProps);
+export default withConsumer(mapMethodsToProps)(PersonDetails);

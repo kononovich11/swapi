@@ -17,4 +17,4 @@ const mapMethodsToProps = (swapi) => {
   }
 }
 
-export default withConsumer(PlanetDetails ,mapMethodsToProps);
+export default withConsumer(mapMethodsToProps)(PlanetDetails);

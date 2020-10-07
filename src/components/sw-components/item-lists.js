@@ -2,7 +2,7 @@ import React from 'react';
 import ItemList from '../item-list';
 import {withData, withConsumer} from '../hoc-helpers';
 
-const withChildFunction = (Wrapped, fn) => {
+const withChildFunction = (fn) => (Wrapped) => {
   return (props) => {
     return (
       <Wrapped {...props}>
@@ -32,14 +32,21 @@ const mapSrarshipMethodsToProps = (swapi) => {
   }
 }
 
-const listWithChildren = withChildFunction(ItemList, renderName);
 
-const PersonList = withConsumer(
-                    withData(listWithChildren), mapPersonMethodsToProps);
-const PlanetList = withConsumer(
-                    withData(listWithChildren), mapPlanetMethodsToProps);
-const StarshipList = withConsumer(
-                    withData(listWithChildren), mapSrarshipMethodsToProps);
+const PersonList = withConsumer(mapPersonMethodsToProps)(
+                    withData(
+                      withChildFunction(renderName)(
+                        ItemList)));       
+
+const PlanetList = withConsumer(mapPlanetMethodsToProps)(
+                    withData(
+                      withChildFunction(renderName)(
+                        ItemList)));  
+
+const StarshipList = withConsumer(mapSrarshipMethodsToProps)(
+                      withData(
+                        withChildFunction(renderName)(
+                          ItemList)));  
 
 export {
   PersonList,
