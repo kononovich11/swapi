@@ -3,9 +3,18 @@ import Header from '../header';
 import RandomPlanet from '../random-planet';
 import SwapiService from '../../services/swapi-service';
 import TestSwapiService from '../../services/test-service';
-import {PeoplePage, PlanetPage, StarshipPage} from '../pages';
 import {Provider} from '../swapi-context';
+import { StarshipDetails } from '../sw-components';
 import './app.css';
+import {PeoplePage, 
+        PlanetPage, 
+        StarshipPage,
+        SecretPage,
+        LoginPage} from '../pages';
+import {BrowserRouter as Router, 
+        Route, 
+        Switch, 
+        Redirect } from 'react-router-dom';
 
 export default class App extends Component {
 
@@ -13,6 +22,12 @@ export default class App extends Component {
     swapi: new SwapiService(),
     showRandomPlanet: true,
     hasError: false,
+    isLogin: false,
+  }
+
+  onLogin = () => {
+    console.log('click');
+    this.setState({isLogin:true});
   }
 
   componentDidCatch() {
@@ -45,21 +60,48 @@ export default class App extends Component {
     }
 
     const planet = this.state.showRandomPlanet? <RandomPlanet/> : null; 
+    const {isLogin} = this.state;
 
     return (
       <Provider value={this.state.swapi}>
-        <Header onServiceChange={this.onServiceChange}/>
-        {planet} 
+        <Router>
+          <Header onServiceChange={this.onServiceChange}/>
+          {planet} 
 
-        <button className="toggel-planet btn btn-warning btn-lg"
-                onClick={this.toggelRandomPlanet}>
-          Toggel Random Planet
-        </button>
+          <button className="toggel-planet btn btn-warning btn-lg"
+                  onClick={this.toggelRandomPlanet}>
+            Toggel Random Planet
+          </button>
 
-        <PeoplePage/>  
-        <PlanetPage/>
-        <StarshipPage/>
+          <Switch>
+            <Route path="/" 
+                  render={() => <h2>Welcome to StarDB</h2>}
+                  exact/>
+            <Route path="/people/:id?" 
+                  component={PeoplePage}/>
+            <Route path="/planets" component={PlanetPage}/>
+            <Route path="/starships" 
+                  component={StarshipPage} 
+                  exact/>
+            <Route path="/starships/:id" 
+                  render={({match}) => {
+                  const id = match.params.id;
+                  return <StarshipDetails itemId={id}/>}}
+                  exact/>
+            <Route path="/secret/"
+                  render={() => {
+                    return <SecretPage isLogin={isLogin}/>
+                  }}/>  
+            <Route path="/login/"
+                  render={() => {
+                    return <LoginPage 
+                              isLogin={isLogin}
+                              loginClick={this.onLogin}/>
+                  }}/> 
+            <Route render={() => <h2>Page not found</h2>}/>
+          </Switch>    
 
+        </Router>
       </Provider>
     );
   } 
